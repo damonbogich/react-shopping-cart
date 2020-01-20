@@ -1,18 +1,29 @@
-import React from 'react';
-
+import React, {useContext} from 'react';
+import CartContext from '../Contexts/CartContext';
 // Components
 import Item from './ShoppingCartItem';
 
-const ShoppingCart = props => {
+
+//Step 7:  
+	//First, let's head to our ShoppingCart component and import the useContext hook and our CartContext.
+	//Now in the component, pass CartContext to the useContext hook and assign it to a variable named cart.
+	//Inside of our component we now need to remove all instances of props.
+
+
+
+const ShoppingCart = () => {
+	const cart = useContext(CartContext);
 	const getCartTotal = () => {
-		return props.cart.reduce((acc, value) => {
-			return acc + value.price;
+		return cart.reduce((acc, value) => {
+			return acc + value.item.price;
 		}, 0).toFixed(2);
 	};
+	//Think about moving this up
+	
 
 	return (
 		<div className="shopping-cart">
-			{props.cart.map(item => (
+			{cart.map(item => (
 				<Item key={item.id} {...item} />
 			))}
 
